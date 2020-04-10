@@ -43,12 +43,12 @@ export default {
 						message: "删除成功",
 						type: "success",
 					});
-					this.$router.push("/blog/main");
+					this.$router.push("/index");
 				});
 			});
 		},
 		more() {
-			this.$router.push("/blog/main");
+			this.$router.push("/index");
 		},
 	},
 };

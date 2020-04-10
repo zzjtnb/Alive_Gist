@@ -140,15 +140,16 @@ service.interceptors.response.use(response => {
 /**
  * 统一封装GET请求
  * @param {String} url [请求的url地址]
- * @param {Object} params [请求时携带的参数]
+ * @param {Object} params [`params` 是即将与请求一起发送的 URL参数,请求时携带的参数]
  * @param {Object} config [请求时配置]
  */
-export const GET = (url, data, config = {}) => {
+export const GET = (url, params, config = {}) => {
+  console.log(params);
   return new Promise((resolve, reject) => {
     service({
       method: 'GET',
       url,
-      data,
+      params,
       ...config
     }).then(response => {
       resolve(response)
@@ -160,7 +161,7 @@ export const GET = (url, data, config = {}) => {
 /**
  * 统一封装POST请求
  * @param {String} url [请求的url地址]
- * @param {Object} params [请求时携带的参数]
+ * @param {Object} data  [`data` 是作为请求主体被发送的数据,只适用于这些请求方法 'PUT', 'POST', 和 'PATCH']
  * @param {Object} config [请求时配置]
  */
 export const POST = (url, data, config = {}) => {
@@ -180,7 +181,7 @@ export const POST = (url, data, config = {}) => {
 /**
  * 统一封装PUT请求
  * @param {String} url [请求的url地址]
- * @param {Object} params [请求时携带的参数]
+ * @param {Object} data  [`data` 是作为请求主体被发送的数据,只适用于这些请求方法 'PUT', 'POST', 和 'PATCH']
  * @param {Object} config [请求时配置]
  */
 export const PUT = (url, data, config) => {
@@ -200,7 +201,7 @@ export const PUT = (url, data, config) => {
 /**
  * 统一封装PATCH请求
  * @param {String} url [请求的url地址]
- * @param {Object} params [请求时携带的参数]
+ * @param {Object} data  [`data` 是作为请求主体被发送的数据,只适用于这些请求方法 'PUT', 'POST', 和 'PATCH']
  * @param {Object} config [请求时配置]
  */
 export const PATCH = (url, data, config) => {
@@ -220,7 +221,7 @@ export const PATCH = (url, data, config) => {
 /**
  * 统一封装DELETE请求
  * @param {String} url [请求的url地址]
- * @param {Object} params [请求时携带的参数]
+ * @param {Object} data  [`data` 是作为请求主体被发送的数据,只适用于这些请求方法 'PUT', 'POST', 和 'PATCH']
  * @param {Object} config [请求时配置]
  */
 export const DELETE = (url, data, config) => {

@@ -22,7 +22,7 @@
 				</el-form-item>
 				<el-form-item>
 					<el-button type="primary" @click="onSubmit" :loading="submitButton.loading" :disabled="submitButton.disabled">发表</el-button>
-					<el-button @click="$router.push('/user/blog/main')">返回</el-button>
+					<el-button @click="$router.push('/index')">返回</el-button>
 				</el-form-item>
 			</el-form>
 		</el-card>
@@ -172,8 +172,7 @@ export default {
 						public: this.switchValue,
 						files: files,
 					};
-					console.log(this.switchValue);
-					createGist(data, id)
+					createGist(data)
 						.then(res => {
 							if (res.status == "200") {
 								this.$message({
@@ -181,7 +180,7 @@ export default {
 									type: "success",
 								});
 							}
-							this.$router.push("/blog/details/" + res.data.id);
+							this.$router.push("/details/" + res.data.id);
 						})
 						.then(() => {
 							this.submitButton.loading = false;
