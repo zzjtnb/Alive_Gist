@@ -50,6 +50,13 @@ Vue.config.productionTip = false
 import mavonEditor from 'mavon-editor';
 import 'mavon-editor/dist/css/index.css';
 Vue.use(mavonEditor);
+
+Vue.prototype.$reload = function (context) {
+  let NewPage = '/empty'
+  context.$router.push(NewPage)
+  context.$nextTick(() => (context.$router.go(-1)))
+}
+
 Vue.prototype.$markdown = function (value) {
   return mavonEditor.markdownIt.render(value)
 }

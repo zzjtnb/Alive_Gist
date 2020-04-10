@@ -3,7 +3,7 @@ const configuration = {
     githubUsername: '',
     blogTitle: '',
     blogDescribe: '',
-    htmlTitle: '',
+    htmlTitle: '争逐',
     fontColor: '',
     useBackgroundImage: false,
     backgroundColorLeft: '',
@@ -25,7 +25,7 @@ const configuration = {
         `欢迎来到${state.githubUsername}的个人博客。`
 
       state.htmlTitle =
-        configuration['htmlTitle'] || `${state.githubUsername}的博客`
+        configuration['htmlTitle'] || "争逐"
 
       state.fontColor = configuration['fontColor'] || '#ffffff'
 

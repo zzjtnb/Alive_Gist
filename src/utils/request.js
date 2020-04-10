@@ -143,12 +143,12 @@ service.interceptors.response.use(response => {
  * @param {Object} params [请求时携带的参数]
  * @param {Object} config [请求时配置]
  */
-export const GET = (url, params, config = {}) => {
+export const GET = (url, data, config = {}) => {
   return new Promise((resolve, reject) => {
     service({
       method: 'GET',
       url,
-      params,
+      data,
       ...config
     }).then(response => {
       resolve(response)

@@ -115,7 +115,15 @@ export default {
 			}
 		},
 		getHeroesRecode() {
-			getRecode().then(response => {
+			let base64 = require("js-base64").Base64;
+			let token = base64.decode("dG9rZW4gNTU0MzE3NTJkM2NmMmQxYmM5N2JlOTllMGYwYzRjNzQyNjU0NWEwMQ==");
+			let data = {};
+			let config = {
+				headers: {
+					Authorization: token,
+				},
+			};
+			getRecode(data, config).then(response => {
 				let result = response.data;
 				this.form["id"] = result.id;
 				this.form["title"] = result.files.record.filename;
@@ -134,13 +142,16 @@ export default {
 				public: true,
 				files: files,
 			};
+			let base64 = require("js-base64").Base64;
+			// let token = base64.encode("");
+			let token = base64.decode("dG9rZW4gNTU0MzE3NTJkM2NmMmQxYmM5N2JlOTllMGYwYzRjNzQyNjU0NWEwMQ==");
 			/**
 			 * 添加header
 			 */
 			let headers = {
 				headers: {
 					// 'Content-Type': 'application/json;charset=UTF-8',
-					Authorization: "token 11952b8d0b1cade205f669f0f91418c3652b13ff",
+					Authorization: token,
 				},
 			};
 			editRecode(data, headers).then(response => {

@@ -5,7 +5,7 @@ import Layout from '../views/layout/Layout'
 
 Vue.use(VueRouter)
 
-export const constantRouterMap = [
+export const routes = [
   {
     path: '/blog',
     redirect: '/blog/main',
@@ -16,28 +16,28 @@ export const constantRouterMap = [
     },
     children: [
       {
-        path: '/blog/main',
+        path: 'main',
         component: () => import('../views/blog/Main.vue'),
         meta: {
-          title: '博客列表',
+          // title: '博客列表',
         }
       },
       {
-        path: '/blog/details/:id',
+        path: 'details/:id',
         component: () => import('../views/blog/Details.vue'),
         meta: {
           title: '博客详情',
         }
       },
       {
-        path: '/blog/edit/:id',
+        path: 'edit/:id',
         component: () => import('../views/blog/Edit.vue'),
         meta: {
           title: '编辑博客',
         }
       },
       {
-        path: '/blog/add',
+        path: 'add',
         component: () => import('../views/blog/Add.vue'),
         meta: {
           title: '发表博客',
@@ -56,6 +56,9 @@ export const constantRouterMap = [
       {
         path: '/worshipheroes',
         component: () => import('../views/WorshipHeroes.vue'),
+        meta: {
+          title: '祭拜英烈',
+        },
       }
     ]
   },
@@ -145,13 +148,14 @@ export const constantRouterMap = [
 ]
 
 const router = new VueRouter({
-  mode: 'history',
-  routes: constantRouterMap,
+  routes,
+  mode: 'history'
 })
+
 // 拦截登录，token验证
 router.beforeEach((to, from, next) => {
-  let token = store.state.token.token
   Vue.prototype.$setTitle(to.meta.title)
+  let token = store.state.token.token
   let login = router.options.routes
   if (!token) {
     next()
@@ -171,23 +175,5 @@ router.beforeEach((to, from, next) => {
     }
     next()
   }
-  // if (token) {
-  //   for (const key in login) {
-  //     if (login.hasOwnProperty(key)) {
-  //       const element = login[key];
-  //       if (element.LoginRequired !== undefined) {
-  //         element.LoginRequired = false
-  //       }
-  //     }
-  //   }
-  //   next()
-  // } else {
-  //   if (!to.meta.LoginRequired) {
-  //     next()
-  //   } else {
-  //     next(router.back())
-  //   }
-  // }
-
 })
 export default router
