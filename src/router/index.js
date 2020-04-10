@@ -8,7 +8,7 @@ Vue.use(VueRouter)
 export const routes = [
   {
     path: '/blog',
-    redirect: '/index',
+    redirect: '/blog/index',
     component: Layout,
     meta: {
       title: '个人博客',
@@ -16,28 +16,28 @@ export const routes = [
     },
     children: [
       {
-        path: '/index',
+        path: 'index',
         component: () => import('../views/blog/Main.vue'),
         meta: {
           // title: '博客列表',
         }
       },
       {
-        path: '/details/:id',
+        path: 'details/:id',
         component: () => import('../views/blog/Details.vue'),
         meta: {
           title: '博客详情',
         }
       },
       {
-        path: '/edit/:id',
+        path: 'edit/:id',
         component: () => import('../views/blog/Edit.vue'),
         meta: {
           title: '编辑博客',
         }
       },
       {
-        path: '/add',
+        path: 'add',
         component: () => import('../views/blog/Add.vue'),
         meta: {
           title: '发表博客',
@@ -138,7 +138,7 @@ export const routes = [
   },
   {
     path: '/',
-    redirect: '/index'
+    redirect: '/blog/index'
   },
   {
     path: '*',

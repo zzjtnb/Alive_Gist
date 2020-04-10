@@ -22,7 +22,7 @@
 				</el-form-item>
 				<el-form-item>
 					<el-button type="primary" @click="onSubmit" :loading="submitButton.loading" :disabled="submitButton.disabled">发表</el-button>
-					<el-button @click="$router.push('/index')">返回</el-button>
+					<el-button @click="$router.push('/')">返回</el-button>
 				</el-form-item>
 			</el-form>
 		</el-card>
