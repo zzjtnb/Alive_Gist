@@ -160,11 +160,14 @@ module.exports = {
 
   // 配置pwa
   pwa: {
-    name: "争逐",
-    appleMobileWebAppCapable: "yes",
-    appleMobileWebAppStatusBarStyle: "blue",
-    themeColor: "#50E3C2",
-    msTileColor: "#4A90E2"
+    name: '争逐',
+    appleMobileWebAppCapable: 'yes',
+    appleMobileWebAppStatusBarStyle: '#0064d2',
+    themeColor: '#0064d2',
+    msTileColor: '#0064d2',
+    manifestOptions: {
+      background_color: '#0064d2'
+    }
   },
 
   runtimeCompiler: true,
