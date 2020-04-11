@@ -11,6 +11,11 @@
 									<h2 class="entry-title" @click="goDetails(item.id)">
 										<a>{{item.title}}</a>
 									</h2>
+									<div class="tools">
+										<el-button @click="$share('/blog/details/'+item.id)" style="padding: 3px 0" type="text" icon="el-icon-share">分享</el-button>
+										<el-button @click="editBlog(index)" style="padding: 3px 0" type="text" icon="el-icon-edit" v-if="token">编辑</el-button>
+										<el-button @click="deleteGists(index)" style="padding: 3px 0" type="text" icon="el-icon-delete" v-if="token">删除</el-button>
+									</div>
 								</header>
 								<div class="entry-excerpt u-text-format">
 									<p>{{item.description}}</p>
@@ -24,11 +29,6 @@
 										{{item.updateTime}}
 									</a>
 								</div>
-							</div>
-							<div class="tools">
-								<el-button @click="$share('/blog/details/'+item.id)" style="padding: 3px 0" type="text" icon="el-icon-share">分享</el-button>
-								<el-button @click="editBlog(index)" style="padding: 3px 0" type="text" icon="el-icon-edit" v-if="token">编辑</el-button>
-								<el-button @click="deleteGists(index)" style="padding: 3px 0" type="text" icon="el-icon-delete" v-if="token">删除</el-button>
 							</div>
 						</article>
 					</el-col>
@@ -174,8 +174,6 @@ export default {
 }
 
 .tools {
-	width: 50%;
-	text-align: end;
 }
 /**
 文章部分
