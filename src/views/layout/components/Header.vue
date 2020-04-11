@@ -13,13 +13,15 @@
 					<!-- 导航栏 -->
 					<nav v-if="showNav" v-show="!searchShow">
 						<ul id="menu" class="nav-list u-plain-list">
-							<li class="menu-item" v-for="menu in $router.options.routes" v-if="menu.children  &&!menu.LoginRequired&&!menu.show">
+							<!-- 主菜单 -->
+							<li class="menu-item" v-for="menu in this.$router.options.routes" v-if="menu.meta&&!menu.requiresAuth">
 								<router-link :to="menu.path">
 									<span>{{ menu.meta.title }}</span>
 									<i class="material-icons nav-icon" v-if="menu.meta.submenu&&token">keyboard_arrow_down</i>
 								</router-link>
-								<ul class="sub-menu" v-if="menu.meta.submenu && menu.path !== '/login'&&token">
-									<li class="menu-item" v-for="(submenu, index) in menu.children" v-if="submenu.meta.LoginRequired==true">
+								<!-- 子菜单 -->
+								<ul class="sub-menu" v-if="menu.meta.submenu&&token">
+									<li class="menu-item" v-for="(submenu, index) in menu.children" v-if="submenu.meta.requiresAuth==true">
 										<router-link :to="submenu.path">{{submenu.meta.title }}</router-link>
 									</li>
 								</ul>
@@ -27,11 +29,11 @@
 						</ul>
 					</nav>
 					<div class="actions" v-if="!searchShow">
-						<div class="login-btn navbar-button" @click="login" v-if="!token">
+						<div class="login-btn navbar-button" @click="login()" v-if="!token">
 							<i class="material-icons">account_circle</i>
 							<a>登录</a>
 						</div>
-						<div class="login-btn navbar-button" @click="cancellation" v-else>
+						<div class="login-btn navbar-button" @click="cancellation()" v-else>
 							<i class="material-icons">power_settings_new</i>
 							<a>注销</a>
 						</div>
@@ -74,8 +76,6 @@ export default {
 		...mapGetters(["Mobile", "token", "mini", "Query"]),
 	},
 	created() {
-		// console.log(this.token);
-		// console.log(this.$store.getters.Mobile)
 		if (this.Mobile) {
 			this.showNav = false;
 		} else {
@@ -127,7 +127,8 @@ export default {
 	},
 	methods: {
 		login() {
-			this.$router.replace("/user");
+			this.$router.push("/login");
+			// this.$router.push("/blog/details/" + id);
 		},
 		cancellation() {
 			this.$store.dispatch("Cancellation");

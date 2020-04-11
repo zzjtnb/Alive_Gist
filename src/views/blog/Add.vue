@@ -15,6 +15,8 @@
 					<el-dialog :visible.sync="dialogVisible">
 						<img width="100%" :src="dialogImageUrl" alt />
 					</el-dialog>
+				</el-form-item>
+				<el-form-item>
 					<el-switch v-model="switchValue" active-text="是否公开"></el-switch>
 				</el-form-item>
 				<el-form-item label="正文" prop="content">

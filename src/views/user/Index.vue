@@ -26,56 +26,55 @@
 </template>
 
 <script>
-import Login from './Login';
-import Signup from './Signup';
+import Login from "./Login";
+import Signup from "./Signup";
+import {mapGetters} from "vuex";
 export default {
-  data () {
-    return {
-      // 控制子组件显示与隐藏的标识，类型为Boolean
-      loginShow: true,
-      signupShow: false,
-    }
-  },
-  mounted () {
-    this.closeUser()
-  },
-  watch: {
-
-  },
-  methods: {
-    showDialog (value) {
-      this.loginShow = !this.loginShow
-      this.signupShow = !this.signupShow
-    },
-    closeUser () {
-      // 点击其他区域时, 隐藏指定区域(User)
-      document.addEventListener("click", event => {
-        let bigArea = document.querySelector("#bigArea");
-        let userArea = document.querySelector(".modal-body");
-        let clickArea = event.target;
-        if (userArea) {
-          if (userArea == clickArea || userArea.contains(clickArea)) {
-
-          } else {
-            // //获取回跳的redirect地址
-            // const redirect = this.$route.query.redirect
-            // /**
-            //  * 如果redirect存在说明当前用户是进入某页面后未登陆自动跳转到登陆页面来的，所以登陆完成后得再次回跳到该地址.否则跳转到默认的页面，首页或者其他页面
-            //  */
-            // console.log(redirect)
-            // this.$router.push(redirect ? redirect : '/')
-            window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
-            bigArea.style.display = "none"
-          }
-        }
-      });
-    }
-  },
-  components: {
-    Login,
-    Signup
-  },
-}
+	data() {
+		return {
+			// 控制子组件显示与隐藏的标识，类型为Boolean
+			loginShow: true,
+			signupShow: false,
+		};
+	},
+	computed: {
+		...mapGetters(["token", "Mobile", "Query"]),
+	},
+	mounted() {
+		this.closeUser();
+		this.$store.dispatch("SetRedirect", this.$route.query.redirect);
+	},
+	watch: {},
+	methods: {
+		showDialog(value) {
+			this.loginShow = !this.loginShow;
+			this.signupShow = !this.signupShow;
+		},
+		closeUser() {
+			let bigArea = document.querySelector("#bigArea"); //非登录注册区域
+			let userArea = document.querySelector(".swal2-content"); //登录注册区域
+			// 点击其他区域时, 隐藏指定区域(User)
+			bigArea.addEventListener("click", event => {
+				let clickArea = event.target; //点击的区域
+				if (userArea !== clickArea && userArea.contains(clickArea) == false) {
+					/**
+					 * 如果redirect存在说明当前用户是进入某页面后未登陆自动跳转到登陆页面来的，
+					 * 所以登陆完成后得再次回跳到该地址.否则跳转到默认的页面，首页或者其他页面
+					 */
+					if (this.$route.query.redirect && this.token) {
+						this.$router.replace(redirect);
+					} else {
+						this.$router.push("/");
+					}
+				}
+			});
+		},
+	},
+	components: {
+		Login,
+		Signup,
+	},
+};
 </script>
 
 <style>

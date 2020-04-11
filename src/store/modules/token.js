@@ -3,7 +3,6 @@ import UserApi from '@/api/user'
 import store from '../index'
 import router from '../../router/index'//引入路由
 import Vue from 'vue'
-
 const TOKEN_KEY = "TOKEN_KEY"
 const token = {
   // 多个 state 的操作 , 使用 mutations 会来触发会比较好维护 , 那么需要执行多个 mutations 就需要用 action 了
@@ -40,7 +39,12 @@ const token = {
             message: 'Token绑定成功',
             type: 'success'
           })
-          router.back()
+          console.log(store.state.common.redirect);
+          if (store.state.common.redirect !== undefined) {
+            router.push(store.state.common.redirect);
+          } else {
+            router.push('/')
+          }
         } else {
           Vue.prototype.$message({
             message: 'Token用户不一致',
@@ -57,6 +61,12 @@ const token = {
         message: 'Token取消绑定',
         type: 'error'
       })
+      location.reload();
+      // if (store.state.common.redirect) {
+      //   router.replace(store.state.common.redirect);
+      // } else {
+      //   router.push('/');
+      // }
     },
   }
 }

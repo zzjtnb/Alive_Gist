@@ -41,7 +41,7 @@ export const routes = [
         component: () => import('../views/blog/Add.vue'),
         meta: {
           title: '发表博客',
-          LoginRequired: true,
+          requiresAuth: true,
         }
       },
     ]
@@ -62,27 +62,10 @@ export const routes = [
       }
     ]
   },
-  // {
-  //   path: '/managelabels',
-  //   component: Layout,
-  //   LoginRequired: true,
-  //   meta: {
-  //     title: '管理标签',
-  //   },
-  //   children: [
-  //     {
-  //       path: '/managelabels',
-  //       component: () => import('../views/Labels/manageLabels.vue'),
-  //       meta: {
-  //         LoginRequired: true,
-  //       }
-  //     }
-  //   ]
-  // },
   {
     path: '/record',
     component: Layout,
-    LoginRequired: true,
+    requiresAuth: true,
     meta: {
       title: '记录',
     },
@@ -98,28 +81,17 @@ export const routes = [
     path: '/search',
     redirect: '/search',
     component: Layout,
-    show: true,
-    meta: {
-      title: '搜索结果',
-    },
     children: [
       {
         path: '/search',
-        component: () => import('../components/Search.vue'),
-      }
+        component: () => import(/* webpackChunkName: "about" */ '../components/Search.vue'),
+      },
     ]
   },
   {
     path: '/login',
-    redirect: '/user',
-    component: Layout,
-    show: true,
-    children: [
-      {
-        path: '/user',
-        component: () => import(/* webpackChunkName: "about" */ '../views/user/Index.vue'),
-      },
-    ]
+    name: 'Login',
+    component: () => import(/* webpackChunkName: "about" */ '../views/user/Index.vue'),
   },
   {
     path: '/notnetwork',
@@ -152,28 +124,30 @@ const router = new VueRouter({
   mode: 'history'
 })
 
-// 拦截登录，token验证
+/**
+ * beforeEach  拦截登录，token验证
+ */
 router.beforeEach((to, from, next) => {
-  Vue.prototype.$setTitle(to.meta.title)
   let token = store.state.token.token
+  Vue.prototype.$setTitle(to.meta.title)
   let login = router.options.routes
-  if (!token) {
-    next()
-    if (!to.meta.LoginRequired) {
+  if (!token) {// 判断当前的token是否存在
+    if (!to.meta.requiresAuth) {//layout下面的
       next()
     } else {
-      next(router.back())
+      next({
+        path: '/login',
+        query: { redirect: to.fullPath }  // 将跳转的路由path作为参数，登录成功后跳转到该路由
+      })
     }
   } else {
-    for (const key in login) {
-      if (login.hasOwnProperty(key)) {
-        const element = login[key];
-        if (element.LoginRequired !== undefined) {
-          element.LoginRequired = false
-        }
+    login.forEach(item => {
+      if (item.requiresAuth !== undefined) {
+        item.requiresAuth = false
       }
-    }
+    });
     next()
   }
 })
+
 export default router

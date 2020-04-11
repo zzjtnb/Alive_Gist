@@ -5,16 +5,20 @@ const common = {
     networkSuccess: true,
     Mobile: true,
     ShowSideBar: false,
+    redirect: '',
+    searchValue: '',
     xianhua_num: 0,
     dianzhu_num: 0,
     jingjiu_num: 0,
     jingli_num: 0,
     jugong_num: 0,
-    searchValue: '',
   },
   // 更改 Vuex 的 store 中的状态的唯一方法是提交 mutation
   mutations: {
-    NOT_NETWORK: (state, value) => {//这里的state对应着上面这个state
+    SET_REDIRECT: (state, value) => {
+      state.redirect = value
+    },
+    SET_NOTNETWORK: (state, value) => {//这里的state对应着上面这个state
       state.networkSuccess = value
     },
     IS_Mobile: (state, value) => {
@@ -27,7 +31,7 @@ const common = {
       state.jingli_num = heroseRecord.jingli_num;
       state.jugong_num = heroseRecord.jugong_num;
     },
-    IsSideBar: (state, value) => {
+    SET_SideBar: (state, value) => {
       state.ShowSideBar = value
     },
     SET_SEARCHVALUE: (state, value) => {
@@ -44,19 +48,22 @@ const common = {
   // dispactch方法调用action,mapAactions方法调用action
   actions: {
     ChangeNetwork ({ commit }, value) {
-      commit('NOT_NETWORK', value)
+      commit('SET_NOTNETWORK', value)
     },
     Mobile ({ commit }, value) {
       commit("IS_Mobile", value)
     },
     ShowSide ({ commit }, value) {
-      commit("IsSideBar", value)
+      commit("SET_SideBar", value)
     },
     LocalReload ({ commit }, heroseRecord) {
       commit('SET_HEROESRECORD', heroseRecord)
     },
     SetSearchValue ({ commit }, value) {
       commit('SET_SEARCHVALUE', value)
+    },
+    SetRedirect ({ commit }, value) {
+      commit('SET_REDIRECT', value)
     }
   }
 }

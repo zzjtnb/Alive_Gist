@@ -16,6 +16,9 @@
 						<img width="100%" :src="dialogImageUrl" alt />
 					</el-dialog>
 				</el-form-item>
+				<el-form-item>
+					<el-switch v-model="switchValue" active-text="是否公开"></el-switch>
+				</el-form-item>
 				<el-form-item label="正文" prop="content">
 					<mavon-editor @imgAdd="imgAdd" style="max-height: 500px" ref="md" v-model="form.content" :subfield="false" :toolbars="mavonEditorToolbars" :ishljs="true" :codeStyle="true" codeStyle="agate" />
 				</el-form-item>
@@ -33,6 +36,7 @@ import {getSingle, editGist, UploadImageApi} from "@/api/gist";
 export default {
 	data() {
 		return {
+			switchValue: true,
 			form: {
 				id: "",
 				title: "",
@@ -171,7 +175,7 @@ export default {
 					files[this.form.title] = {content: this.form.content};
 					let data = {
 						description: this.form.description,
-						public: true,
+						public: this.switchValue,
 						files: files,
 					};
 					editGist(id, data)

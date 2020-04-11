@@ -144,7 +144,6 @@ service.interceptors.response.use(response => {
  * @param {Object} config [请求时配置]
  */
 export const GET = (url, params, config = {}) => {
-  console.log(params);
   return new Promise((resolve, reject) => {
     service({
       method: 'GET',

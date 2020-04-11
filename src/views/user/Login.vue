@@ -21,36 +21,34 @@
 
 <script>
 // import { query } from '@/api/index'
-import userNav from './userNav';
+import userNav from "./userNav";
 export default {
-  /*   // props的对象形式
+	/*   // props的对象形式
     props: {
       login: {
         type: Boolean,
         default: true
       }
     }, */
-  props: ['login'],
-  data () {
-    return {
-      loginForm: {
-        username: 'zzjtnb',
-        token: ""
-      }
-    }
-  },
-  mounted () {
-
-  },
-  methods: {
-    onSubmit () {
-      this.$store.dispatch("Authentication", this.loginForm.token)
-    }
-  },
-  components: {
-    userNav
-  },
-}
+	props: ["login"],
+	data() {
+		return {
+			loginForm: {
+				username: "zzjtnb",
+				token: "",
+			},
+		};
+	},
+	mounted() {},
+	methods: {
+		onSubmit() {
+			this.$store.dispatch("Authentication", this.loginForm.token);
+		},
+	},
+	components: {
+		userNav,
+	},
+};
 </script>
 
 <style scoped>

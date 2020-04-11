@@ -52,6 +52,9 @@ export default {
 			blogs: [],
 		};
 	},
+	computed: {
+		...mapGetters(["token", "Mobile", "Query"]),
+	},
 	created() {
 		if (this.Mobile) {
 			this.$store.dispatch("SetQueryPageSize", 5);
@@ -59,9 +62,6 @@ export default {
 		this.getGistList();
 	},
 	mounted() {},
-	computed: {
-		...mapGetters(["token", "Mobile", "Query"]),
-	},
 	methods: {
 		getGistList(datas) {
 			this.blogs = [];
