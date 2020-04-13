@@ -21,7 +21,7 @@
 								</router-link>
 								<!-- 子菜单 -->
 								<ul class="sub-menu" v-if="menu.meta.submenu&&token">
-									<li class="menu-item" v-for="(submenu, index) in menu.children" v-if="submenu.meta.requiresAuth==true">
+									<li class="menu-item" v-for="(submenu, index) in menu.children" v-if="submenu.meta.requiresAuth">
 										<router-link :to="submenu.path">{{submenu.meta.title }}</router-link>
 									</li>
 								</ul>

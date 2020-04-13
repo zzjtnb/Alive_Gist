@@ -16,11 +16,11 @@
 						<img width="100%" :src="dialogImageUrl" alt />
 					</el-dialog>
 				</el-form-item>
-				<el-form-item>
-					<el-switch v-model="switchValue" active-text="是否公开"></el-switch>
+				<el-form-item label="是否公开">
+					<el-switch v-model="switchValue" active-text="是"></el-switch>
 				</el-form-item>
-				<el-form-item label="正文" prop="content">
-					<mavon-editor @imgAdd="imgAdd" style="max-height: 500px" ref="md" v-model="form.content" :subfield="false" :toolbars="mavonEditorToolbars" :ishljs="true" :codeStyle="true" codeStyle="agate" />
+				<el-form-item label="正文" prop="content" class="content" style="margin:0">
+					<mavon-editor @imgAdd="imgAdd" style="min-height: 500px" ref="md" v-model="form.content" :subfield="false" :toolbars="mavonEditorToolbars" :ishljs="true" :codeStyle="true" codeStyle="agate" />
 				</el-form-item>
 				<el-form-item>
 					<el-button type="primary" @click="onSubmit" :loading="submitButton.loading" :disabled="submitButton.disabled">发表</el-button>
@@ -211,9 +211,12 @@ export default {
 	margin-left: 10px;
 	vertical-align: bottom;
 }
-/* .el-form-item + .lables > .el-form-item__content {
-	margin-left: 80px;
-	display: flex;
-	align-items: center;
-} */
+@media (max-width: 750px) {
+	/* .content >>> .el-form-item__content {
+		margin-left: 0;
+	} */
+	.content /deep/ .el-form-item__content {
+		margin-left: 0 !important;
+	}
+}
 </style>

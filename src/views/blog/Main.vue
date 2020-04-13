@@ -250,7 +250,7 @@ section {
 .bgcolor-fff {
 	background-color: #fff;
 }
-@media (max-width: 767px) {
+@media (max-width: 750px) {
 	.entry-title {
 		font-size: 14px;
 		width: 100%;

@@ -11,17 +11,16 @@
 		</div>
 		<div class="mobile-menu hidden-lg hidden-xl">
 			<div class="slicknav_menu">
-				<ul class="slicknav_nav" v-for="menu in $router.options.routes">
-					<li class="menu-item slicknav_parent" v-if="menu.children && !menu.show&& !menu.meta.submenu && !menu.requiresAuth" @click="closeSide(false)">
-						<router-link :to="menu.path">{{ menu.meta.title }}</router-link>
-					</li>
-					<li class="menu-item slicknav_parent" v-if="menu.children && !menu.show&&menu.meta.submenu ">
-						<a>
-							<router-link :to="menu.path" @click.native="closeSide(false)">{{ menu.meta.title }}</router-link>
+				<ul class="slicknav_nav">
+					<!-- 主菜单 -->
+					<li class="menu-item slicknav_parent" v-for="menu in this.$router.options.routes" v-if="menu.meta&&!menu.requiresAuth">
+						<router-link :to="menu.path">
+							<span @click="closeSide(false)">{{ menu.meta.title }}</span>
 							<i class="material-icons nav-icon" :class="{transform:transform}" v-if="menu.meta.submenu&&token" @click="showSubmenu(true)">keyboard_arrow_down</i>
-						</a>
-						<ul class="sub-menu" v-if="isShow&&menu.meta.submenu &&token">
-							<li class="menu-item sub-menu-item" v-for="(submenu, index) in menu.children" v-if="submenu.meta.requiresAuth==true&&token" @click="closeSide(false)">
+						</router-link>
+						<!-- 子菜单 -->
+						<ul class="sub-menu" v-if="isShow&&menu.meta.submenu&&token">
+							<li class="menu-item sub-menu-item" v-for="(submenu, index) in menu.children" v-if="submenu.meta.requiresAuth" @click="closeSide(false)">
 								<router-link :to="submenu.path">{{submenu.meta.title }}</router-link>
 							</li>
 						</ul>
