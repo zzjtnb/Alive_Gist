@@ -30,18 +30,21 @@ module.exports = {
       config.mode = 'production'
       /**
        * gzip压缩
+       * 配置productionGzip - 高级的方式
+       * 配置参数详解
+       * algorithm： 可以是 function(buf, callback) 或者字符串。对于字符串来说依照 zlib 的算法(或者 zopfli 的算法) 。默认值是 "gzip"。
+       * test： 所有匹配该正则的资源都会被处理。默认值是全部资源。
+       * threshold： 只有大小大于该值的资源会被处理。单位是 bytes。默认值是 0。
+       * minRatio： 只有压缩率小于这个值的资源才会被处理。默认值是 0.8。
        */
       const productionGzipExtensions = ["js", "css", "svg", "woff", "ttf", "json", "html"];
       config.plugins.push(
         new CompressionWebpackPlugin({
           filename: "[path].gz[query]",
           algorithm: "gzip",
-          // test: productionGzipExtensions,
-          test: new RegExp(
-            '\\.(' + productionGzipExtensions.join('|') + ')$'
-          ),
-          threshold: 10240, // 只有大小大于该值的资源会被处理 10kb
-          minRatio: 0.8, // 只有压缩率小于这个值的资源才会被处理
+          test: new RegExp('\\.(' + productionGzipExtensions.join('|') + ')$'),
+          threshold: 10240,
+          minRatio: 0.8,
           deleteOriginalAssets: false  // 删除原文件
         }),
       );
@@ -169,6 +172,7 @@ module.exports = {
   },
 
   runtimeCompiler: true,
+  // 生产环境是否生成 sourceMap 文件
   productionSourceMap: false,
 
   css: {
