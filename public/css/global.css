@@ -6,6 +6,23 @@
   padding: 0;
   word-break: break-all;
 }
+/* 显示隐藏 */
+.hidden {
+  display: none;
+}
+/**清除浮动 */
+.clearfix {
+  zoom: 1;
+}
+.clearfix::after {
+  clear: both;
+}
+.clearfix::after,
+.clearfix::before {
+  content: "";
+  display: table;
+}
+
 /**
 css 更改鼠标为手状样式
 auto                    ：标准光标  
@@ -26,23 +43,6 @@ span,
 a {
   cursor: pointer;
 }
-/* 显示隐藏 */
-.hidden {
-  display: none;
-}
-/**清除浮动 */
-.clearfix {
-  zoom: 1;
-}
-.clearfix::after {
-  clear: both;
-}
-.clearfix::after,
-.clearfix::before {
-  content: "";
-  display: table;
-}
-
 article,
 aside,
 footer,

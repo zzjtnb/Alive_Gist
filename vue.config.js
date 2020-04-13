@@ -53,8 +53,6 @@ module.exports = {
           uglifyOptions: {
             //生产环境自动删除console
             compress: {
-              // warnings: false, // 若打包错误，则注释这行
-              drop_debugger: true,
               drop_console: true,
               pure_funcs: ['console.log']
             }
