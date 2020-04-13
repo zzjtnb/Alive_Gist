@@ -58,7 +58,8 @@ export default {
 };
 </script>
 <style>
-@import "/css/global.css"; /*引入公共样式*/
+/* @import "/css/global.css"; */
+
 .fade-enter-active,
 .fade-leave-active {
 	transition: opacity 0.5s;
@@ -78,18 +79,7 @@ export default {
 	transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
 	transition: transform 0.5s cubic-bezier(0.77, 0, 0.175, 1), -webkit-transform 0.5s cubic-bezier(0.77, 0, 0.175, 1);
 }
-/**清除浮动 */
-.clearfix {
-	zoom: 1;
-}
-.clearfix::after {
-	clear: both;
-}
-.clearfix::after,
-.clearfix::before {
-	content: "";
-	display: table;
-}
+
 html,
 body,
 #app {
@@ -102,25 +92,5 @@ body,
 .markdown-body pre,
 .markdown-body pre code {
 	white-space: pre-wrap !important;
-}
-/**
-css 更改鼠标为手状样式
-auto                    ：标准光标  
-default                 ：标准箭头  
-pointer, hand           ：手形光标  
-wait                    ：等待光标  
-text                    ：I形光标  
-vertical-text           ：水平I形光标  
-no-drop                 ：不可拖动光标  
-not-allowed             ：无效光标  
-help                    ：帮助光标  
-all-scroll              ：三角方向标  
-move                    ：移动标  
-crosshair               ：十字标 
- */
-i,
-span,
-a {
-	cursor: pointer;
 }
 </style>
