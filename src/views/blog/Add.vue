@@ -182,7 +182,7 @@ export default {
 									type: "success",
 								});
 							}
-							this.$router.push("/details/" + res.data.id);
+							this.$router.push("details/" + res.data.id);
 						})
 						.then(() => {
 							this.submitButton.loading = false;
