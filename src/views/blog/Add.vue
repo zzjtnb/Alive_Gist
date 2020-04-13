@@ -1,5 +1,5 @@
 <template>
-	<div style="min-height: 600px">
+	<div style="min-height: 600px;max-width: 1090pt;margin: 0 auto;">
 		<el-card shadow="never" style="margin-bottom: 20px">
 			<el-form ref="form" :model="form" label-width="80px" :rules="ruleValidate">
 				<el-form-item label="标题" prop="title">
