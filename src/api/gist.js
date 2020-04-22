@@ -15,4 +15,4 @@ export const getGist = (params) => GET(`${base.github}/users/${githubUsername}/g
 
 export const getSingle = (params) => GET(`${base.github}/gists/${params}`);
 
-export const UploadImageApi = (name, params, config) => PUT(`${base.github}/repos/${githubUsername}/images/contents/test/${name}`, params, config);
+export const UploadImageApi = (name, form, params, config) => PUT(`${base.github}/repos/${githubUsername}/${form.repos}/contents${form.name}/${name}`, params, config);

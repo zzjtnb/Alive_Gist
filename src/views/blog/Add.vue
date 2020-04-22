@@ -8,6 +8,23 @@
 				<el-form-item label="简要说明" prop="description">
 					<el-input v-model="form.description" type="textarea"></el-input>
 				</el-form-item>
+				<el-row type="flex" class="row-bg">
+					<el-col :span="12">
+						<el-form-item label="仓库" prop="repos">
+							<el-input v-model="form.repos" type="textarea"></el-input>
+						</el-form-item>
+					</el-col>
+					<el-col :span="12">
+						<el-form-item label="分支" prop="branch">
+							<el-input v-model="form.branch" type="textarea"></el-input>
+						</el-form-item>
+					</el-col>
+					<el-col :span="12">
+						<el-form-item label="文件夹" prop="name">
+							<el-input v-model="form.name" type="textarea"></el-input>
+						</el-form-item>
+					</el-col>
+				</el-row>
 				<el-form-item label="缩略图">
 					<el-upload list-type="picture-card" action ref="upload" :on-preview="handlePictureCardPreview" :http-request="UploadImage" :auto-upload="true" :file-list="fileList" multiple>
 						<i class="el-icon-plus"></i>
@@ -16,6 +33,7 @@
 						<img width="100%" :src="dialogImageUrl" alt />
 					</el-dialog>
 				</el-form-item>
+
 				<el-form-item label="是否公开">
 					<el-switch v-model="switchValue" active-text="是"></el-switch>
 				</el-form-item>
@@ -42,6 +60,9 @@ export default {
 				title: "",
 				description: "",
 				content: "",
+				repos: "images",
+				branch: "master",
+				name: "",
 			},
 			ruleValidate: {
 				title: [
@@ -61,6 +82,7 @@ export default {
 				},
 				message: "Add File",
 				content: "",
+				branch: "",
 			},
 			dialogImageUrl: "",
 			dialogVisible: false,
@@ -128,12 +150,16 @@ export default {
 					//上传文件
 					let data = binary.match(/^data.*base64,(.*)/)[1];
 					that.addImage.content = data;
+					that.addImage.branch = that.form.branch;
 					let config = {
 						headers: {
 							Accept: "application/vnd.github.VERSION.base64",
 						},
 					};
-					UploadImageApi(that.imageName, that.addImage, config)
+					if (that.form.name !== "" && that.form.name.indexOf("/") == -1) {
+						that.form.name = "/" + that.form.name;
+					}
+					UploadImageApi(that.imageName, that.form, that.addImage, config)
 						.then(response => {
 							console.log("上传图片成功");
 							that.imgsrc = response.data.content.download_url;
