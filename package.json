@@ -11,7 +11,7 @@
     "core-js": "^3.6.4",
     "element-ui": "^2.12.0",
     "fastclick": "^1.0.6",
-    "highlight.js": "^9.18.1",
+    "highlight.js": "^10.4.1",
     "js-base64": "^2.5.2",
     "js-cookie": "^2.2.1",
     "material-design-icons": "^3.0.1",
